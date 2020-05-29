@@ -1,15 +1,17 @@
-package com.neversonsilva.cursomc.controllers;
+package com.neversonsilva.cursomc.resources;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
-public class IndexController {
-
+@RequestMapping("/categorias")
+public class CategoriaResource {
+	
 	@GetMapping("")
-	public String index() {
-		return "Hello World";
+	public String listar() {
+		
+		return "REST Está funcionando!";
 	}
+
 }
