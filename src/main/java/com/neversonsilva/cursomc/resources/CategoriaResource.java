@@ -1,27 +1,29 @@
 package com.neversonsilva.cursomc.resources;
 
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.neversonsilva.cursomc.domain.Categoria;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.neversonsilva.cursomc.services.CategoriaService;
 
 
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
 	
-	@GetMapping("")
-	public List<Categoria> listar() {
+	@Autowired
+	private CategoriaService catService;
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable("id") Integer id) {
 		
-		var cat1 = new Categoria(1, "Informaticas");
-		var cat2 = new Categoria(2	, "Escritório");
-		
-		var lista = Arrays.asList(cat1, cat2);
+		Categoria categoria = catService.buscar(id);
 			
-		return lista;
+		return ResponseEntity.ok(categoria);
 	}
 
 }
