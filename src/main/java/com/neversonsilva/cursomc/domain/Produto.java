@@ -1,6 +1,6 @@
 package com.neversonsilva.cursomc.domain;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -22,9 +23,7 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 @Entity
-public class Categoria implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Produto {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
@@ -36,11 +35,19 @@ public class Categoria implements Serializable {
 	@NonNull
 	private String nome;
 	
-	@ManyToMany(mappedBy="categorias", cascade = CascadeType.ALL)
-	private List<Produto> produtos = new ArrayList<>();
+	@Column
+	@NonNull
+	private Double preco;
 	
-	public Categoria(Integer id, String nome) {
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name="PRODUTO_CATEGORIA", 
+		joinColumns=@JoinColumn(name="produto_id"),
+		inverseJoinColumns= @JoinColumn(name="categoria_id"))
+	private List<Categoria> categorias = new ArrayList<>();
+	
+	public Produto(Integer id, String nome, Double preco) {
 		this.id = id;
 		this.nome = nome;
+		this.preco = preco;
 	}
 }
