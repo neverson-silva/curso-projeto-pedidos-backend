@@ -23,11 +23,7 @@ public class CategoriaResource {
 		
 		Categoria categoria = catService.buscar(id);
 		
-		if (categoria !=null ) {
-			return ResponseEntity.ok(categoria);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+		return ResponseEntity.ok(categoria);
 			
 	}
 

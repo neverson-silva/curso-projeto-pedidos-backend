@@ -1,5 +1,6 @@
 package com.neversonsilva.cursomc.domains;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,27 +17,32 @@ import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 
-@Data
 @NoArgsConstructor
+@EqualsAndHashCode(of= {"id"})
+@Getter
+@Setter
 @Entity
-public class Produto {
+public class Produto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	@Column
-	@NonNull
 	private Integer id;
 	
 	@Column
-	@NonNull
 	private String nome;
 	
 	@Column
-	@NonNull
 	private Double preco;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
