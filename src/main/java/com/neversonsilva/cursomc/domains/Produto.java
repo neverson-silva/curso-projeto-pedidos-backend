@@ -1,6 +1,5 @@
-package com.neversonsilva.cursomc.domain;
+package com.neversonsilva.cursomc.domains;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -43,6 +43,7 @@ public class Produto {
 	@JoinTable(name="PRODUTO_CATEGORIA", 
 		joinColumns=@JoinColumn(name="produto_id"),
 		inverseJoinColumns= @JoinColumn(name="categoria_id"))
+    @JsonBackReference
 	private List<Categoria> categorias = new ArrayList<>();
 	
 	public Produto(Integer id, String nome, Double preco) {

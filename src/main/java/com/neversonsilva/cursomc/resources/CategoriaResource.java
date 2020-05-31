@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.neversonsilva.cursomc.domain.Categoria;
+import com.neversonsilva.cursomc.domains.Categoria;
 import com.neversonsilva.cursomc.services.CategoriaService;
 
 

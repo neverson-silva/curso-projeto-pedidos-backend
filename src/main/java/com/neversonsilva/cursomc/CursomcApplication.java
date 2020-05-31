@@ -7,8 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.neversonsilva.cursomc.domain.Categoria;
-import com.neversonsilva.cursomc.domain.Produto;
+import com.neversonsilva.cursomc.domains.Categoria;
+import com.neversonsilva.cursomc.domains.Produto;
 import com.neversonsilva.cursomc.repositories.CategoriaRepository;
 import com.neversonsilva.cursomc.repositories.ProdutoRepository;
 import com.neversonsilva.cursomc.resources.CategoriaResource;
