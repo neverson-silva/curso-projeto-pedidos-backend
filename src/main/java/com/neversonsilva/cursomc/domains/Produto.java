@@ -2,7 +2,10 @@ package com.neversonsilva.cursomc.domains;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,15 +17,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 @NoArgsConstructor
@@ -52,9 +53,22 @@ public class Produto implements Serializable {
     @JsonBackReference
 	private List<Categoria> categorias = new ArrayList<>();
 	
+	@OneToMany(mappedBy="id.produto")
+	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
+
+	
 	public Produto(Integer id, String nome, Double preco) {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+	}
+	
+	public List<Pedido> getPedidos() {
+		
+		List<Pedido> lista = itens.stream()
+								  .map(item -> item.getPedido())
+								  .collect(Collectors.toList());
+		return lista;
+		
 	}
 }
