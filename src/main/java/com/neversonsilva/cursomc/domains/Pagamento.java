@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
 
 import lombok.AllArgsConstructor;
@@ -49,6 +50,7 @@ public abstract class Pagamento  implements Serializable{
 	@MapsId
 	@Getter
 	@Setter
+	@JsonBackReference
 	private Pedido pedido;
 
 	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {

@@ -20,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -54,6 +55,7 @@ public class Produto implements Serializable {
 	private List<Categoria> categorias = new ArrayList<>();
 	
 	@OneToMany(mappedBy="id.produto")
+	@JsonIgnore
 	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 
 	
@@ -63,6 +65,7 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 	
+	@JsonIgnore
 	public List<Pedido> getPedidos() {
 		
 		List<Pedido> lista = itens.stream()

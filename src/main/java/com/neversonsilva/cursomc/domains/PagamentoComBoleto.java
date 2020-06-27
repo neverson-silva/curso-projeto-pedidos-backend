@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +19,10 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of= {"id"}, callSuper=true)
 public class PagamentoComBoleto extends Pagamento {
 	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataVencimento;
 	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataPagamento;
 
 	public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {

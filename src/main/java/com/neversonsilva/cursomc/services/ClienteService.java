@@ -16,8 +16,8 @@ public class ClienteService {
 	private ClienteRepository clienteRepository;
 	
 	public Cliente buscar(Integer id) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		return cliente.orElseThrow(() -> new ObjectNotFoundException(
+		Optional<Cliente> pedido = clienteRepository.findById(id);
+		return pedido.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo " + Cliente.class.getName()));
 	}
 }
