@@ -40,7 +40,6 @@ public class Categoria implements Serializable {
 	private String nome;
 	
 	@ManyToMany(mappedBy="categorias", cascade = CascadeType.ALL)
-	@JsonManagedReference
 	private List<Produto> produtos = new ArrayList<>();
 	
 	public Categoria(Integer id, String nome) {
