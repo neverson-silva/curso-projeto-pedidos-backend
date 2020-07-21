@@ -1,12 +1,15 @@
 package com.neversonsilva.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.neversonsilva.cursomc.domains.Categoria;
+import com.neversonsilva.cursomc.dto.CategoriaDTO;
 import com.neversonsilva.cursomc.exceptions.DataIntegrityException;
 import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
 import com.neversonsilva.cursomc.repositories.CategoriaRepository;
@@ -41,5 +44,13 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
 		}
 		
+	}
+
+	public List<CategoriaDTO> findAll() {
+		var categorias =  categoryRepository.findAll();
+		List<CategoriaDTO> categoriaDTOList = categorias.stream()
+														.map(cat -> new CategoriaDTO(cat))
+														.collect(Collectors.toList());
+		return categoriaDTOList;
 	}
 }
