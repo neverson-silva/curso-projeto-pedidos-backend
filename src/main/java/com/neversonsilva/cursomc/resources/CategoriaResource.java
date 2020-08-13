@@ -23,6 +23,8 @@ import com.neversonsilva.cursomc.domains.Categoria;
 import com.neversonsilva.cursomc.dto.CategoriaDTO;
 import com.neversonsilva.cursomc.services.CategoriaService;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/categorias")
@@ -42,8 +44,9 @@ public class CategoriaResource {
 	
 	@PostMapping("")
 	@ResponseBody
-	public ResponseEntity<Void> insert(@RequestBody Categoria categoria) {
-		
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
+
+		Categoria categoria = catService.fromDto(objDto);
 		categoria = catService.insert(categoria);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -54,7 +57,8 @@ public class CategoriaResource {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable("id") Integer id, @RequestBody Categoria categoria) {
+	public ResponseEntity<Void> update(@PathVariable("id") Integer id, @Valid @RequestBody CategoriaDTO dto) {
+		Categoria categoria = catService.fromDto(dto);
 		categoria.setId(id);
 		categoria = catService.update(categoria);
 		return ResponseEntity.noContent().build();
