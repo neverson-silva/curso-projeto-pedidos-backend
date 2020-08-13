@@ -7,16 +7,15 @@ import java.util.stream.Collectors;
 import com.neversonsilva.cursomc.domains.Cliente;
 import com.neversonsilva.cursomc.dto.ClienteDTO;
 import com.neversonsilva.cursomc.exceptions.DataIntegrityException;
+import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
+import com.neversonsilva.cursomc.repositories.ClienteRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import com.neversonsilva.cursomc.domains.Cliente;
-import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
-import com.neversonsilva.cursomc.repositories.ClienteRepository;
 
 @Service
 public class ClienteService {

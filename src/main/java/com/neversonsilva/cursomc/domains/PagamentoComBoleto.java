@@ -19,7 +19,12 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of= {"id"}, callSuper=true)
 public class PagamentoComBoleto extends Pagamento {
 	
-	@JsonFormat(pattern="dd/MM/yyyy")
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataVencimento;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")

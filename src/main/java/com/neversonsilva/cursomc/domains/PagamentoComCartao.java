@@ -1,7 +1,5 @@
 package com.neversonsilva.cursomc.domains;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
@@ -19,6 +17,10 @@ import lombok.NonNull;
 @EqualsAndHashCode(of= {"id"}, callSuper=true)
 public class PagamentoComCartao extends Pagamento {
 	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer numeroDeParcelas;
 
 	public PagamentoComCartao(@NonNull EstadoPagamento estado, @NonNull Pedido pedido, Integer numeroParcelas) {

@@ -7,13 +7,13 @@ public enum TipoCliente {
 	PESSOA_JURIDICA(2, "Pessoa Jurídica");
 	
 	@Getter
-	private int cod;
+	private int code;
 	
 	@Getter
 	private String descricao;
 	
-	private TipoCliente(int cod, String descricao) {
-		this.cod = cod;
+	private TipoCliente(int code, String descricao) {
+		this.code = code;
 		this.descricao = descricao;
 	}
 	
@@ -22,7 +22,7 @@ public enum TipoCliente {
 			return null;
 		}
 		for (TipoCliente x: TipoCliente.values()) {
-			if (cod.equals(x.getCod())) {
+			if (cod.equals(x.getCode())) {
 				return x;
 			}
 		}
