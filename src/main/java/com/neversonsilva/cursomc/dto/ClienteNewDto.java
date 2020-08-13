@@ -2,6 +2,13 @@ package com.neversonsilva.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import com.neversonsilva.cursomc.services.validation.ClienteInsert;
+
+import org.hibernate.validator.constraints.Length;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,26 +17,30 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ClienteInsert
 public class ClienteNewDto implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     @NonNull
 	@Getter
-	@Setter
-	private String nome;
+    @Setter
+    @NotEmpty(message = "Preenchimento obrigatorio")
+    @Length(min = 5, max = 120,message = "O tamanho deve ser entre 5 e 120 caracteres.")
+    private String nome;
+
 	
 	@NonNull
 	@Getter
-	@Setter
+    @Setter
+    @Email(message = "Email invalido")
+    @NotEmpty(message = "Preenchimento obrigatorio")
 	private String email;
 
 	@NonNull
 	@Getter
-	@Setter
+    @Setter
+    @NotEmpty(message = "Preenchimento obrigatorio")
 	private String cpfOuCnpj;
 
     @NonNull
@@ -39,12 +50,14 @@ public class ClienteNewDto implements Serializable {
     
     @NonNull
     @Getter
-	@Setter
+    @Setter
+    @NotEmpty(message = "Preenchimento obrigatorio")
 	private String logradouro;
 	
     @NonNull
     @Getter
-	@Setter
+    @Setter
+    @NotEmpty(message = "Preenchimento obrigatorio")
 	private String numero;
 	
     @NonNull
@@ -54,17 +67,20 @@ public class ClienteNewDto implements Serializable {
 	
     @NonNull
     @Getter
-	@Setter
+    @Setter
+    @NotEmpty(message = "Preenchimento obrigatorio")
 	private String bairro;
 	
     @NonNull
     @Getter
-	@Setter
+    @Setter
+    @NotEmpty(message = "Preenchimento obrigatorio")
     private String cep;
     
     @NonNull
     @Getter
-	@Setter
+    @Setter
+    @NotEmpty(message = "Preenchimento obrigatorio")
     private String telefone1;
     
     @Getter
