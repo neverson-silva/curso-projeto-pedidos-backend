@@ -16,12 +16,9 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of= {"id"})
 @Getter
@@ -35,13 +32,16 @@ public class Cidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NonNull
 	private String nome;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="estado_id")
-	@NonNull
 	@JsonManagedReference
 	private Estado estado;
+
+	public Cidade(String nome, Estado estado) {
+		this.nome = nome;
+		this.estado = estado;
+	}
 
 }
