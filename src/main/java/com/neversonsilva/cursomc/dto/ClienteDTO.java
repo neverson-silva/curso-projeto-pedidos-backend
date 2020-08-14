@@ -1,6 +1,8 @@
 package com.neversonsilva.cursomc.dto;
 
 import com.neversonsilva.cursomc.domains.Cliente;
+import com.neversonsilva.cursomc.services.validation.ClienteUpdate;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -17,6 +19,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 
     /**
