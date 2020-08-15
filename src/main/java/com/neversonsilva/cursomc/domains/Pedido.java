@@ -64,6 +64,14 @@ public class Pedido  implements Serializable{
 	@OneToMany(mappedBy="id.pedido")
 	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 	
-	
+	public double getValorTotal()
+	{
+
+		return itens.stream()
+					.map(item -> item.getSubtotal() )
+					.reduce(0.0, ( total, current) -> total + current);
+
+	}
+
 	
 }
