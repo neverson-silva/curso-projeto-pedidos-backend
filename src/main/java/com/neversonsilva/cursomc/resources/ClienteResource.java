@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import com.neversonsilva.cursomc.domains.Cliente;
 import com.neversonsilva.cursomc.dto.ClienteDTO;
 import com.neversonsilva.cursomc.dto.ClienteNewDto;
+import com.neversonsilva.cursomc.repositories.ClienteRepository;
 import com.neversonsilva.cursomc.services.ClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService clienteService;
 	
+	@Autowired
+
+	private ClienteRepository cl;
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable("id") Integer id) {
 		
@@ -43,6 +48,7 @@ public class ClienteResource {
 		return ResponseEntity.ok(cliente);
 			
 	}
+	
 
 	@PostMapping("")
 	@ResponseBody
