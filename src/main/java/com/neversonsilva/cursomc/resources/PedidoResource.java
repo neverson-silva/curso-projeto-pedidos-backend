@@ -42,9 +42,9 @@ public class PedidoResource {
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public ResponseEntity<Void> insert(@Valid @RequestBody PedidoDTO pedidoDTO) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido pedido) {
 
-		Pedido pedido = pedidoService.fromDto(pedidoDTO);
+		pedido = pedidoService.insert(pedido);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 											 .path("/{id}")

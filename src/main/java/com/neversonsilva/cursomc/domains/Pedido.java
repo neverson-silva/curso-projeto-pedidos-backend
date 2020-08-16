@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -61,6 +62,7 @@ public class Pedido  implements Serializable{
 	private Endereco enderecoEntrega;
 	
 	@OneToMany(mappedBy="id.pedido")
+	@JsonIgnore
 	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 
 	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoEntrega) {

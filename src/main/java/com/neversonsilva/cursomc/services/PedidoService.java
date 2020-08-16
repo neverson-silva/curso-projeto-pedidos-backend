@@ -3,19 +3,19 @@ package com.neversonsilva.cursomc.services;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
-import com.neversonsilva.cursomc.domains.*;
-import com.neversonsilva.cursomc.dto.ItemPedidoDto;
-import com.neversonsilva.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.neversonsilva.cursomc.domains.PagamentoComBoleto;
+import com.neversonsilva.cursomc.domains.Pedido;
+import com.neversonsilva.cursomc.domains.Produto;
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
-import com.neversonsilva.cursomc.dto.PagamentoDto;
-import com.neversonsilva.cursomc.dto.PedidoDTO;
 import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
+import com.neversonsilva.cursomc.repositories.ClienteRepository;
+import com.neversonsilva.cursomc.repositories.EnderecoRepository;
+import com.neversonsilva.cursomc.repositories.ItemPedidoRepository;
+import com.neversonsilva.cursomc.repositories.PagamentoRepository;
+import com.neversonsilva.cursomc.repositories.PedidoRepository;
 
 @Service
 public class PedidoService {
@@ -76,59 +76,4 @@ public class PedidoService {
 		return pedido;
 	}
 
-	@Transactional
-	public Pedido fromDto( PedidoDTO pedidoDTO) {
-
-		Cliente cliente = clienteRepository.findById(pedidoDTO.getCliente().getId()).get();
-		Endereco enderecoEntrega = enderecoRepository.findById(pedidoDTO.getEnderecoEntrega().getId()).get();
-		Pedido pedido = new Pedido();
-		pedido.setId(null);
-		pedido.setInstante(new Date());
-		pedido.setCliente(cliente);
-		pedido.setEnderecoEntrega(enderecoEntrega);
-
-		if (pedidoDTO.getPagamento().getType().equals("pagamentoComCartao")) {
-			pedido.setPagamento(newPagamentoComCartao(pedidoDTO, pedido));
-		} else {
-			pedido.setPagamento(newPagamentoComBoleto(pedido));
-		}
-		pedido.getPagamento().setEstado(EstadoPagamento.PENDENTE);
-
-
-		pedidoDTO.getItens().forEach((ItemPedidoDto item) -> {
-			Produto produto = produtoService.find( item.getProduto().getId() );
-			ItemPedido itemPedido = new ItemPedido(pedido, produto);
-			itemPedido.setDesconto(0.0);
-			itemPedido.setPreco( produto.getPreco() );
-			itemPedido.setQuantidade( item.getQuantidade() );
-			pedido.getItens().add(itemPedido);
-			
-		});
-
-		pedidoRepository.save(pedido);
-		pagamentoRepository.save(pedido.getPagamento());
-
-		itemPedidoRepository.saveAll(pedido.getItens());
-
-		return pedido;
-	}
-
-	private PagamentoComCartao newPagamentoComCartao(PedidoDTO pedidoDTO, Pedido pedido) {
-
-		PagamentoDto pagamentoDto = pedidoDTO.getPagamento();
-		PagamentoComCartao pagamento = new PagamentoComCartao();
-		pagamento.setId(null);
-		pagamento.setNumeroDeParcelas(pagamentoDto.getNumeroDeParcelas());
-		pagamento.setPedido(pedido);
-		return pagamento;
-	}
-
-	private PagamentoComBoleto newPagamentoComBoleto(Pedido pedido) {
-
-		PagamentoComBoleto pagamento = new PagamentoComBoleto();
-		pagamento.setId(null);
-		boletoService.preencherPagamentoComBoleto(pagamento, pedido.getInstante());
-		pagamento.setPedido(pedido);
-		return pagamento;
-	}
 }

@@ -1,4 +1,4 @@
-package com.neversonsilva.config;
+package com.neversonsilva.cursomc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.neversonsilva.cursomc.domains.PagamentoComBoleto;
