@@ -9,7 +9,7 @@ import com.neversonsilva.cursomc.domains.Pedido;
 
 import lombok.Getter;
 
-public abstract class AbstractMailService implements EmailService{
+public abstract class AbstractEmailService implements EmailService{
 
 	
 	@Value("${default.sender}")

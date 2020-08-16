@@ -126,7 +126,7 @@ public class DBService {
 		estaRepo.saveAll(Arrays.asList(est1, est2));
 		cidaRepo.saveAll(Arrays.asList(c1, c2, c3));
 		
-		var cli1 = new Cliente("Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA);
+		var cli1 = new Cliente("Maria Silva", "neversonbs13@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA);
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 		
 		var e1 = new Endereco("Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
