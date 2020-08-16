@@ -6,12 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.neversonsilva.cursomc.domains.Cliente;
 import com.neversonsilva.cursomc.domains.PagamentoComBoleto;
 import com.neversonsilva.cursomc.domains.Pedido;
 import com.neversonsilva.cursomc.domains.Produto;
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
 import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
-import com.neversonsilva.cursomc.repositories.ClienteRepository;
 import com.neversonsilva.cursomc.repositories.EnderecoRepository;
 import com.neversonsilva.cursomc.repositories.ItemPedidoRepository;
 import com.neversonsilva.cursomc.repositories.PagamentoRepository;
@@ -36,7 +36,7 @@ public class PedidoService {
 	private PagamentoRepository pagamentoRepository;
 
 	@Autowired
-	ClienteRepository clienteRepository;
+	ClienteService clienteService;
 
 	@Autowired
 	EnderecoRepository enderecoRepository;
@@ -53,6 +53,9 @@ public class PedidoService {
 		pedido.setInstante(new Date());
 		pedido.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		pedido.getPagamento().setPedido(pedido);
+		
+		Cliente cliente = clienteService.find(pedido.getCliente().getId());
+		pedido.setCliente(cliente);
 
 		if (pedido.getPagamento() instanceof PagamentoComBoleto) {
 			PagamentoComBoleto pagto = (PagamentoComBoleto) pedido.getPagamento();
@@ -66,13 +69,12 @@ public class PedidoService {
 		pedido.getItens().forEach(item -> {
 			item.setDesconto(0.0);
 			Produto produto = produtoService.find(item.getProduto().getId());
-
 			item.setPreco(produto.getPreco());
+			item.setProduto(produto);
 			item.setPedido(pedido);
 			
 		});
 		itemPedidoRepository.saveAll(pedido.getItens());
-
 		return pedido;
 	}
 

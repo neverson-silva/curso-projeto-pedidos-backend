@@ -1,8 +1,11 @@
 package com.neversonsilva.cursomc.domains;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,18 +24,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode(of= {"id"})
-@ToString
 public class Pedido  implements Serializable{
 	
 	/**
@@ -62,7 +67,6 @@ public class Pedido  implements Serializable{
 	private Endereco enderecoEntrega;
 	
 	@OneToMany(mappedBy="id.pedido")
-	@JsonIgnore
 	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 
 	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoEntrega) {
@@ -81,6 +85,35 @@ public class Pedido  implements Serializable{
 					.reduce(0.0, ( subtotal, valorAtual) -> subtotal + valorAtual);
 
 	}
+
+	@Override
+	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pedido número: ");
+		builder.append(id);
+		builder.append(", Instante: ");
+		builder.append(sdf.format(getInstante()));
+		builder.append(", Cliente: ");
+		builder.append(getCliente().getNome());
+		builder.append(", Situação do Pagamento: ");
+		builder.append(getPagamento().getEstado().getDescricao());
+		builder.append("\nDetalhes:\n");
+		
+		getItens().forEach(item -> {
+			builder.append(item.toString());
+		});
+		
+		builder.append("Valor total: ");
+		builder.append(nf.format(getValorTotal()));
+
+	
+		return builder.toString();
+	}
+	
+	
 
 	
 }

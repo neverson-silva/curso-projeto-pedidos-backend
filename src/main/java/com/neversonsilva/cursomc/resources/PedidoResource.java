@@ -42,6 +42,7 @@ public class PedidoResource {
 	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido pedido) {
 
 		pedido = pedidoService.insert(pedido);
+		System.out.println(pedido);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 											 .path("/{id}")
