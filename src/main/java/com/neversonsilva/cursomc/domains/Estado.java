@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -38,7 +39,7 @@ public class Estado implements Serializable {
 	private String nome;
 	
 	@OneToMany(mappedBy="estado", cascade = CascadeType.ALL)
-	@JsonBackReference
+	@JsonIgnore
 	private List<Cidade> cidades = new ArrayList<Cidade>();
 
 	public Estado(Integer id, @NonNull String nome) {

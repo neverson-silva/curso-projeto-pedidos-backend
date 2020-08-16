@@ -80,7 +80,7 @@ public class Cliente implements Serializable {
 	@Getter
 	@Setter
 	@OneToMany(mappedBy="cliente")
-	@JsonBackReference
+	@JsonIgnore
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente (Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {

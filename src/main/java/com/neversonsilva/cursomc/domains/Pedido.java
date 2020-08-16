@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +23,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -31,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode(of= {"id"})
+@ToString
 public class Pedido  implements Serializable{
 	
 	/**
@@ -47,13 +48,11 @@ public class Pedido  implements Serializable{
 	private Date instante;
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
-	@JsonManagedReference
 	private Pagamento pagamento;
 
 	@NonNull
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
-	@JsonManagedReference
 	private Cliente cliente;
 
 	@NonNull
@@ -63,13 +62,21 @@ public class Pedido  implements Serializable{
 	
 	@OneToMany(mappedBy="id.pedido")
 	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
+
+	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoEntrega) {
+		super();
+		this.id = id;
+		this.instante = instante;
+		this.cliente = cliente;
+		this.enderecoEntrega = enderecoEntrega;
+	}
 	
 	public double getValorTotal()
 	{
 
 		return itens.stream()
-					.map(item -> item.getSubtotal() )
-					.reduce(0.0, ( total, current) -> total + current);
+					.mapToDouble(item -> item.getSubtotal() )
+					.reduce(0.0, ( subtotal, valorAtual) -> subtotal + valorAtual);
 
 	}
 

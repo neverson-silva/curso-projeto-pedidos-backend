@@ -10,7 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
 
 import lombok.EqualsAndHashCode;
@@ -23,6 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode(of= {"id"})
 @Inheritance(strategy=InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento  implements Serializable{
 	
 	/**
@@ -37,14 +39,14 @@ public abstract class Pagamento  implements Serializable{
 	
 	@NonNull
 	private Integer estado;
-	
+
 	@NonNull
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId
 	@Getter
 	@Setter
-	@JsonBackReference
+	@JsonIgnore
 	private Pedido pedido;
 
 	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
