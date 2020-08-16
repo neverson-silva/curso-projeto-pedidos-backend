@@ -81,7 +81,7 @@ public class Pedido  implements Serializable{
 	{
 
 		return itens.stream()
-					.mapToDouble(item -> item.getSubtotal() )
+					.mapToDouble(item -> item.getSubTotal() )
 					.reduce(0.0, ( subtotal, valorAtual) -> subtotal + valorAtual);
 
 	}
