@@ -36,10 +36,10 @@ public class PedidoService {
 	private PagamentoRepository pagamentoRepository;
 
 	@Autowired
-	ClienteService clienteService;
+	private ClienteService clienteService;
 
 	@Autowired
-	EnderecoRepository enderecoRepository;
+	private EmailService emailService;
 
 	public Pedido find(Integer id) {
 		Optional<Pedido> cliente = pedidoRepository.findById(id);
@@ -75,6 +75,7 @@ public class PedidoService {
 			
 		});
 		itemPedidoRepository.saveAll(pedido.getItens());
+		emailService.sendOrderConfirmationEmail(pedido);
 		return pedido;
 	}
 
