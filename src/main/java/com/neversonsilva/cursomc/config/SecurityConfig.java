@@ -1,11 +1,16 @@
 package com.neversonsilva.cursomc.config;
 
-import org.springframework.boot.autoconfigure.security.servlet.WebSecurityEnablerConfiguration;
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -13,22 +18,29 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 // @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityEnablerConfiguration {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/produtos/**", "/categorias/**",
+	@Autowired
+	private Environment environment;
+	
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
+	
+	private static final String[] PUBLIC_MATCHERS_GET = { "/produtos/**", "/categorias/**" };
 
-	};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-        .authorizeRequests()
-        .antMatchers(PUBLIC_MATCHERS)
-        .permitAll()
-        .anyRequest()
-        .authenticated();
-		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest()
-				.authenticated();
+		
+		if (Arrays.asList(environment.getActiveProfiles()).contains("test")) {
+			http.headers().frameOptions().disable();
+		}
+        http.cors().and().csrf().disable()
+	        .authorizeRequests()
+	        .antMatchers(PUBLIC_MATCHERS).permitAll()
+	        .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
+	        .anyRequest().authenticated()
+	        .and()
+	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 	}
 
