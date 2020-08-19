@@ -17,6 +17,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,7 +29,6 @@ import com.neversonsilva.cursomc.domains.enums.TipoCliente;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
@@ -139,6 +142,19 @@ public class Cliente implements Serializable {
 	
 	public Cliente() {
 		addPerfil(Perfil.CLIENTE);
+	}
+	
+	@PrePersist
+	public void hash() {
+		this.senha = hashPassword(this.senha);
+	}
+	
+	public String hashPassword(String password) {
+		return new BCryptPasswordEncoder().encode(password);
+	};
+	
+	public void setSenha(String senha) {
+		this.senha = hashPassword(senha);
 	}
 	
 }
