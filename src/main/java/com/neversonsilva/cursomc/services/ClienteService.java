@@ -20,6 +20,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,6 +33,9 @@ public class ClienteService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 		
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	public Cliente find(Integer id) {
 		Optional<Cliente> pedido = clienteRepository.findById(id);
 		return pedido.orElseThrow(() -> new ObjectNotFoundException(
@@ -78,7 +83,7 @@ public class ClienteService {
 	}
 
 	public Cliente fromDto(ClienteDTO dto) {
-		return new Cliente(dto.getId(), dto.getNome(), dto.getEmail(), null, null);
+		return new Cliente(dto.getId(), dto.getNome(), dto.getEmail(), null, null, null);
 	}
 
 	public Cliente fromDto(ClienteNewDto dto) {
@@ -87,7 +92,8 @@ public class ClienteService {
 			dto.getNome(), 
 			dto.getEmail(), 
 			dto.getCpfOuCnpj(), 
-			TipoCliente.toEnum(dto.getTipo()));
+			TipoCliente.toEnum(dto.getTipo()),
+			bCryptPasswordEncoder.encode(dto.getSenha()));
 
 		Cidade cidade = new Cidade(dto.getCidadeId(), null, null);
 

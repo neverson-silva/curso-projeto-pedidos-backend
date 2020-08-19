@@ -95,4 +95,9 @@ public class ClienteNewDto implements Serializable {
 	@Setter
     private Integer cidadeId;
     
+    @Getter
+    @Setter
+    @NotEmpty(message="Campo obrigatório")
+    private String senha;
+    
 }

@@ -19,6 +19,7 @@ import com.neversonsilva.cursomc.domains.PagamentoComCartao;
 import com.neversonsilva.cursomc.domains.Pedido;
 import com.neversonsilva.cursomc.domains.Produto;
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
+import com.neversonsilva.cursomc.domains.enums.Perfil;
 import com.neversonsilva.cursomc.domains.enums.TipoCliente;
 import com.neversonsilva.cursomc.repositories.CategoriaRepository;
 import com.neversonsilva.cursomc.repositories.CidadeRepository;
@@ -126,16 +127,22 @@ public class DBService {
 		estaRepo.saveAll(Arrays.asList(est1, est2));
 		cidaRepo.saveAll(Arrays.asList(c1, c2, c3));
 		
-		var cli1 = new Cliente("Maria Silva", "neversonbs13@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA);
+		var cli1 = new Cliente("Maria Silva", "mariasilva@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA, null);
+		var cli2 = new Cliente("Neverson Bento da Silva", "neversonbs13@gmail.com", "24869526085", TipoCliente.PESSOA_FISICA, null);
+		
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		cli2.getTelefones().addAll(Arrays.asList("27363323"));
+		cli2.addPerfil(Perfil.ADMIN);
 		
 		var e1 = new Endereco("Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
 		var e2 = new Endereco("Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		var e3 = new Endereco("Avenida Floriano", "2106", "", "Centro", "38777012", cli2, c2);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 		
-		clienteRepo.save(cli1);
-		endeRepo.saveAll(Arrays.asList(e1,e2));
+		clienteRepo.saveAll(Arrays.asList(cli1, cli2));
+		endeRepo.saveAll(Arrays.asList(e1,e2, e3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm");
 		
