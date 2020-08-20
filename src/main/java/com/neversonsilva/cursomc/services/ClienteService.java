@@ -4,25 +4,27 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.neversonsilva.cursomc.domains.Cidade;
-import com.neversonsilva.cursomc.domains.Cliente;
-import com.neversonsilva.cursomc.domains.Endereco;
-import com.neversonsilva.cursomc.domains.enums.TipoCliente;
-import com.neversonsilva.cursomc.dto.ClienteDTO;
-import com.neversonsilva.cursomc.dto.ClienteNewDto;
-import com.neversonsilva.cursomc.exceptions.DataIntegrityException;
-import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
-import com.neversonsilva.cursomc.repositories.ClienteRepository;
-import com.neversonsilva.cursomc.repositories.EnderecoRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.neversonsilva.cursomc.domains.Cidade;
+import com.neversonsilva.cursomc.domains.Cliente;
+import com.neversonsilva.cursomc.domains.Endereco;
+import com.neversonsilva.cursomc.domains.enums.Perfil;
+import com.neversonsilva.cursomc.domains.enums.TipoCliente;
+import com.neversonsilva.cursomc.dto.ClienteDTO;
+import com.neversonsilva.cursomc.dto.ClienteNewDto;
+import com.neversonsilva.cursomc.exceptions.AuthorizationException;
+import com.neversonsilva.cursomc.exceptions.DataIntegrityException;
+import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
+import com.neversonsilva.cursomc.repositories.ClienteRepository;
+import com.neversonsilva.cursomc.repositories.EnderecoRepository;
+import com.neversonsilva.cursomc.security.UserSS;
 
 @Service
 public class ClienteService {
@@ -37,6 +39,10 @@ public class ClienteService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public Cliente find(Integer id) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN)	&& !id.equals(user.getId()) ) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Optional<Cliente> pedido = clienteRepository.findById(id);
 		return pedido.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo " + Cliente.class.getName()));
