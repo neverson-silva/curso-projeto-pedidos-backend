@@ -79,6 +79,10 @@ public class Cliente implements Serializable {
 	@Setter
 	@JsonIgnore
 	private String senha;
+
+	@Getter
+	@Setter
+	private String imageUrl;
 	
 	public Cliente (Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
 		super();
