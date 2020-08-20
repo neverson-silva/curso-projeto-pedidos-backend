@@ -27,11 +27,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("clientes")
 public class ClienteResource {
 	
 	@Autowired
@@ -106,6 +107,14 @@ public class ClienteResource {
 
 		return ResponseEntity.ok().body(listDto);
 
+	}
+
+	@PostMapping("picture")
+	public ResponseEntity<Void> insert(@RequestParam(name = "file") MultipartFile file) {
+
+		URI uri = clienteService.uploadProfilePicture(file);
+
+		return ResponseEntity.created(uri).build();
 	}
 
 }
