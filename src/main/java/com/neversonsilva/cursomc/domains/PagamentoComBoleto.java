@@ -1,17 +1,15 @@
 package com.neversonsilva.cursomc.domains;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor

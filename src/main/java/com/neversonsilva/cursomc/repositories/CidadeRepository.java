@@ -1,8 +1,7 @@
 package com.neversonsilva.cursomc.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.neversonsilva.cursomc.domains.Cidade;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
 

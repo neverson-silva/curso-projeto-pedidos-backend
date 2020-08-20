@@ -1,15 +1,10 @@
 package com.neversonsilva.cursomc.domains;
 
-import javax.persistence.Entity;
-
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import javax.persistence.Entity;
 
 @Data
 @AllArgsConstructor

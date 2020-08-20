@@ -1,9 +1,10 @@
 package com.neversonsilva.cursomc.services;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import com.neversonsilva.cursomc.domains.Categoria;
+import com.neversonsilva.cursomc.dto.CategoriaDTO;
+import com.neversonsilva.cursomc.exceptions.DataIntegrityException;
+import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
+import com.neversonsilva.cursomc.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -11,11 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.neversonsilva.cursomc.domains.Categoria;
-import com.neversonsilva.cursomc.dto.CategoriaDTO;
-import com.neversonsilva.cursomc.exceptions.DataIntegrityException;
-import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
-import com.neversonsilva.cursomc.repositories.CategoriaRepository;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriaService {

@@ -1,12 +1,11 @@
 package com.neversonsilva.cursomc.services;
 
-import java.util.Random;
-
 import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
 import com.neversonsilva.cursomc.repositories.ClienteRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Random;
 
 @Service
 public class AuthService {

@@ -1,14 +1,13 @@
 package com.neversonsilva.cursomc.repositories;
 
-import java.util.Optional;
-
+import com.neversonsilva.cursomc.domains.Cliente;
+import com.neversonsilva.cursomc.domains.Pedido;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.neversonsilva.cursomc.domains.Cliente;
-import com.neversonsilva.cursomc.domains.Pedido;
+import java.util.Optional;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 	

@@ -1,10 +1,10 @@
 package com.neversonsilva.cursomc.exceptions;
 
-import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
 
 @AllArgsConstructor
 @Getter

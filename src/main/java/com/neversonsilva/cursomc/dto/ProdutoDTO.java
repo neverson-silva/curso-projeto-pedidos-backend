@@ -1,12 +1,11 @@
 package com.neversonsilva.cursomc.dto;
 
-import java.io.Serializable;
-
 import com.neversonsilva.cursomc.domains.Produto;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor

@@ -1,35 +1,16 @@
 package com.neversonsilva.cursomc.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.neversonsilva.cursomc.domains.Categoria;
-import com.neversonsilva.cursomc.domains.Cidade;
-import com.neversonsilva.cursomc.domains.Cliente;
-import com.neversonsilva.cursomc.domains.Endereco;
-import com.neversonsilva.cursomc.domains.Estado;
-import com.neversonsilva.cursomc.domains.ItemPedido;
-import com.neversonsilva.cursomc.domains.Pagamento;
-import com.neversonsilva.cursomc.domains.PagamentoComBoleto;
-import com.neversonsilva.cursomc.domains.PagamentoComCartao;
-import com.neversonsilva.cursomc.domains.Pedido;
-import com.neversonsilva.cursomc.domains.Produto;
+import com.neversonsilva.cursomc.domains.*;
 import com.neversonsilva.cursomc.domains.enums.EstadoPagamento;
 import com.neversonsilva.cursomc.domains.enums.Perfil;
 import com.neversonsilva.cursomc.domains.enums.TipoCliente;
-import com.neversonsilva.cursomc.repositories.CategoriaRepository;
-import com.neversonsilva.cursomc.repositories.CidadeRepository;
-import com.neversonsilva.cursomc.repositories.ClienteRepository;
-import com.neversonsilva.cursomc.repositories.EnderecoRepository;
-import com.neversonsilva.cursomc.repositories.EstadoRepository;
-import com.neversonsilva.cursomc.repositories.ItemPedidoRepository;
-import com.neversonsilva.cursomc.repositories.PagamentoRepository;
-import com.neversonsilva.cursomc.repositories.PedidoRepository;
-import com.neversonsilva.cursomc.repositories.ProdutoRepository;
+import com.neversonsilva.cursomc.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 @Service
 public class DBService {

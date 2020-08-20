@@ -2,12 +2,7 @@ package com.neversonsilva.cursomc.dto;
 
 import com.neversonsilva.cursomc.domains.Cliente;
 import com.neversonsilva.cursomc.services.validation.ClienteUpdate;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;

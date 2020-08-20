@@ -1,11 +1,10 @@
 package com.neversonsilva.cursomc.services;
 
+import com.neversonsilva.cursomc.domains.PagamentoComBoleto;
+import org.springframework.stereotype.Service;
+
 import java.util.Calendar;
 import java.util.Date;
-
-import com.neversonsilva.cursomc.domains.PagamentoComBoleto;
-
-import org.springframework.stereotype.Service;
 
 @Service
 public class BoletoService {

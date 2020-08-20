@@ -1,17 +1,15 @@
 package com.neversonsilva.cursomc.security;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import com.neversonsilva.cursomc.domains.enums.Perfil;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.neversonsilva.cursomc.domains.enums.Perfil;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class UserSS implements UserDetails{

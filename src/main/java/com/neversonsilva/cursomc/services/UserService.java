@@ -1,9 +1,7 @@
 package com.neversonsilva.cursomc.services;
 
-import org.springframework.orm.hibernate5.SpringSessionContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.neversonsilva.cursomc.security.UserSS;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class UserService {
 

@@ -1,11 +1,10 @@
 package com.neversonsilva.cursomc.services;
 
-import javax.mail.internet.MimeMessage;
-
-import org.springframework.mail.SimpleMailMessage;
-
 import com.neversonsilva.cursomc.domains.Cliente;
 import com.neversonsilva.cursomc.domains.Pedido;
+import org.springframework.mail.SimpleMailMessage;
+
+import javax.mail.internet.MimeMessage;
 
 public interface EmailService {
 

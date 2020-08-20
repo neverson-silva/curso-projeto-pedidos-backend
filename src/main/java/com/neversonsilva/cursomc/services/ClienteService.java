@@ -1,19 +1,5 @@
 package com.neversonsilva.cursomc.services;
 
-import java.net.URI;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.neversonsilva.cursomc.domains.Cidade;
 import com.neversonsilva.cursomc.domains.Cliente;
 import com.neversonsilva.cursomc.domains.Endereco;
@@ -27,6 +13,19 @@ import com.neversonsilva.cursomc.exceptions.ObjectNotFoundException;
 import com.neversonsilva.cursomc.repositories.ClienteRepository;
 import com.neversonsilva.cursomc.repositories.EnderecoRepository;
 import com.neversonsilva.cursomc.security.UserSS;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.net.URI;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {

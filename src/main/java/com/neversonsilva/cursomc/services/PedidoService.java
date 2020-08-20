@@ -1,8 +1,5 @@
 package com.neversonsilva.cursomc.services;
 
-import java.util.Date;
-import java.util.Optional;
-
 import com.neversonsilva.cursomc.domains.Cliente;
 import com.neversonsilva.cursomc.domains.PagamentoComBoleto;
 import com.neversonsilva.cursomc.domains.Pedido;
@@ -14,12 +11,14 @@ import com.neversonsilva.cursomc.repositories.ItemPedidoRepository;
 import com.neversonsilva.cursomc.repositories.PagamentoRepository;
 import com.neversonsilva.cursomc.repositories.PedidoRepository;
 import com.neversonsilva.cursomc.security.UserSS;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class PedidoService {

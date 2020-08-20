@@ -1,20 +1,18 @@
 package com.neversonsilva.cursomc.services.validation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
 import com.neversonsilva.cursomc.domains.Cliente;
 import com.neversonsilva.cursomc.domains.enums.TipoCliente;
 import com.neversonsilva.cursomc.dto.ClienteNewDto;
 import com.neversonsilva.cursomc.exceptions.FieldMessage;
 import com.neversonsilva.cursomc.repositories.ClienteRepository;
 import com.neversonsilva.cursomc.services.validation.utils.BR;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDto> {

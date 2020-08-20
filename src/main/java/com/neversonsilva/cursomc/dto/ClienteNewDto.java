@@ -1,19 +1,12 @@
 package com.neversonsilva.cursomc.dto;
 
-import java.io.Serializable;
+import com.neversonsilva.cursomc.services.validation.ClienteInsert;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
-import com.neversonsilva.cursomc.services.validation.ClienteInsert;
-
-import org.hibernate.validator.constraints.Length;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor

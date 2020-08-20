@@ -1,19 +1,13 @@
 package com.neversonsilva.cursomc.domains;
 
-import java.io.Serializable;
-import java.text.NumberFormat;
-import java.util.Locale;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Getter
 @Setter

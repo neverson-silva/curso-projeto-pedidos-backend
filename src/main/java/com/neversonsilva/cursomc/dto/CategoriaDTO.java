@@ -1,14 +1,12 @@
 package com.neversonsilva.cursomc.dto;
 
-import java.io.Serializable;
+import com.neversonsilva.cursomc.domains.Categoria;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
-
-import com.neversonsilva.cursomc.domains.Categoria;
-
-import lombok.NoArgsConstructor;
-import lombok.Data;
-import org.hibernate.validator.constraints.Length;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor

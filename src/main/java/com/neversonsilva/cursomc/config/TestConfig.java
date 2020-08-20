@@ -1,7 +1,8 @@
 package com.neversonsilva.cursomc.config;
 
-import java.text.ParseException;
-
+import com.neversonsilva.cursomc.services.DBService;
+import com.neversonsilva.cursomc.services.EmailService;
+import com.neversonsilva.cursomc.services.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,9 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import com.neversonsilva.cursomc.services.DBService;
-import com.neversonsilva.cursomc.services.EmailService;
-import com.neversonsilva.cursomc.services.MockEmailService;
+import java.text.ParseException;
 
 @Configuration
 @Profile("test")
