@@ -38,6 +38,15 @@ public class ClienteResource {
 		return ResponseEntity.ok(cliente);
 			
 	}
+
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@RequestParam("value") String email) {
+
+		Cliente cliente = clienteService.findByEmail(email);
+
+		return ResponseEntity.ok(cliente);
+
+	}
 	
 
 	@PostMapping("")
@@ -98,7 +107,7 @@ public class ClienteResource {
 	}
 
 	@PostMapping("picture")
-	public ResponseEntity<Void> insert(@RequestParam(name = "file") MultipartFile file) {
+	public ResponseEntity<Void> insertPicture(@RequestParam(name = "file") MultipartFile file) {
 
 		URI uri = clienteService.uploadProfilePicture(file);
 

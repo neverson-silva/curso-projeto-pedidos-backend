@@ -166,4 +166,16 @@ public class ClienteService {
 			filename, "image");
 
 	}
+
+	public Cliente findByEmail(String email) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !user.getUsername().equals(email) ) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		Optional<Cliente> clienteOpt = clienteRepository.findByEmail(email);
+		if (clienteOpt.isEmpty()) {
+			throw new ObjectNotFoundException("Cliente com email: " + email + " não encontrado");
+		}
+		return clienteOpt.get();
+	}
 }
