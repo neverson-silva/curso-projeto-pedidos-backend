@@ -50,14 +50,17 @@ public class ClienteService {
 
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
+
+	@Value("${img.profile.size}")
+	private Integer size;
 	
 	public Cliente find(Integer id) {
 		UserSS user = UserService.authenticated();
 		if (user == null || !user.hasRole(Perfil.ADMIN)	&& !id.equals(user.getId()) ) {
 			throw new AuthorizationException("Acesso negado");
 		}
-		Optional<Cliente> pedido = clienteRepository.findById(id);
-		return pedido.orElseThrow(() -> new ObjectNotFoundException(
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		return cliente.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo " + Cliente.class.getName()));
 	}
 
@@ -151,6 +154,10 @@ public class ClienteService {
 			throw new AuthorizationException("Acesso negado");
 		}
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(mf);
+
+
+		jpgImage = imageService.cropSquare(jpgImage);
+		jpgImage = imageService.resize(jpgImage, size);
 
 		String filename = prefix + user.getId() + ".jpg";
 
