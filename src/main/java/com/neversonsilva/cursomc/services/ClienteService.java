@@ -14,6 +14,7 @@ import com.neversonsilva.cursomc.repositories.ClienteRepository;
 import com.neversonsilva.cursomc.repositories.EnderecoRepository;
 import com.neversonsilva.cursomc.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.awt.image.BufferedImage;
+
 
 @Service
 public class ClienteService {
@@ -41,6 +44,12 @@ public class ClienteService {
 
 	@Autowired
 	private S3Service s3Service;
+	
+	@Autowired
+	private ImageService imageService;
+
+	@Value("${img.prefix.client.profile}")
+	private String prefix;
 	
 	public Cliente find(Integer id) {
 		UserSS user = UserService.authenticated();
@@ -141,13 +150,13 @@ public class ClienteService {
 		if (user == null) {
 			throw new AuthorizationException("Acesso negado");
 		}
-		URI uri =  s3Service.uploadFile(mf);
-		Optional<Cliente> cliopt = clienteRepository.findById(user.getId());
-		Cliente cliente = cliopt.get();
-		cliente.setImageUrl(uri.toString());
-		clienteRepository.save(cliente);
+		BufferedImage jpgImage = imageService.getJpgImageFromFile(mf);
 
-		return uri;
+		String filename = prefix + user.getId() + ".jpg";
+
+		return s3Service.uploadFile(
+			imageService.getInputStream(jpgImage, "jpg"), 
+			filename, "image");
 
 	}
 }
